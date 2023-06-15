@@ -23,7 +23,6 @@ from senteval.sst import SSTEval
 from senteval.rank import ImageCaptionRetrievalEval
 from senteval.probing import *
 from senteval.hans import HANSEval ### newly added
-from senteval.paws import PAWSEval ### newly added
 
 
 class SE(object):
@@ -48,7 +47,7 @@ class SE(object):
         self.batcher = batcher
         self.prepare = prepare if prepare else lambda x, y: None
 
-        self.list_tasks = ['CR', 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 'HANS', 'PAWS', ### newly added HANS and PAWS
+        self.list_tasks = ['CR', 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 'HANS', ### newly added HANS
                            'SICKRelatedness', 'SICKEntailment', 'STSBenchmark',
                            'SNLI', 'ImageCaptionRetrieval', 'STS12', 'STS13',
                            'STS14', 'STS15', 'STS16',
@@ -103,8 +102,6 @@ class SE(object):
             self.evaluation = ImageCaptionRetrievalEval(tpath + '/downstream/COCO', seed=self.params.seed)
         elif name == 'HANS': ### newly added
              self.evaluation = HANSEval(tpath + '/downstream/HANS', seed=self.params.seed)
-        elif name == 'PAWS': ### newly added
-             self.evaluation = PAWSEval(tpath + '/downstream/PAWS', seed=self.params.seed)
 
         # Probing Tasks
         elif name == 'Length':
